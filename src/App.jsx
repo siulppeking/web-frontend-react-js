@@ -1,4 +1,4 @@
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom"
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import { Index } from "./pages/Index"
 import { Login } from "./pages/Login"
 import { Home } from "./pages/Home"
@@ -26,5 +26,5 @@ export const App = () => {
 
       </Routes>
     </Router>
-  )
+  );
 }
