@@ -1,36 +1,66 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
+:root {
+    --primary-color: #615fff;
+    --secondary-color: #4a47c9;
+    --background-color: #f2f2f2;
+    --text-color: #333;
+}
+
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  font-family: "Open Sans", sans-serif;
-  font-size: 16px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 ul {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
-
-ul li {
-  margin-bottom: 10px;
-  background-color: #615fff; 
-  padding: 5px 10px;
-  border-radius: 5px;
+    list-style: none;
+    display: flex;
+    gap: 20px;
 }
 
 ul li a {
-  color: #fff;
-  text-decoration: none;
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    color: #fff;
+    padding: 5px 10px;
+    text-decoration: none;
+}
+
+ul li a:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Table Styles */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th,
+table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+table th {
+    background-color: var(--background-color);
 }
