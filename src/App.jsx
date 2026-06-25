@@ -1,13 +1,19 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
-import { Index } from "./pages/Index"
-import { Login } from "./pages/Login"
-import { Home } from "./pages/Home"
-import { Course } from "./pages/Course"
-import { NotFound } from "./pages/NotFound"
+import { Index } from "./page/Index"
+import { Login } from "./page/Login"
+import { Register } from "./page/Register"
+import { Course } from "./page/Course"
+import { NotFound } from "./page/NotFound"
 import { PublicRouter } from "./routers/PublicRouter"
 import { PrivateRouter } from "./routers/PrivateRouter"
+import { useAuth } from "./context/AuthContext"
 
 export const App = () => {
+
+  const { isChecking } = useAuth();
+
+  if (isChecking) return <div>Loading...</div>;
+
   return (
     <Router>
       <Routes>
@@ -18,7 +24,7 @@ export const App = () => {
         </Route>
 
         <Route element={<PrivateRouter />}>
-          <Route path="/home" element={<Home />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/course" element={<Course />} />
         </Route>
 
