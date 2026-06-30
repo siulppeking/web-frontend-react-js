@@ -111,8 +111,8 @@ export const Attendance = () => {
     return (
         <>
             <PageMeta
-                title="Attendance Page - Web Frontend React JS"
-                description="This is the attendance page of the Web Frontend React JS application."
+                title="Página de Asistencia - Asistencia Docente"
+                description="Página de asistencia para la aplicación de asistencia docente. Registre la asistencia de los alumnos."
             />
 
             <div className="attendance-container">

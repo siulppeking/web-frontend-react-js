@@ -20,8 +20,8 @@ export const Login = () => {
     return (
         <>
             <PageMeta
-                title="Login Page - Web Frontend React JS"
-                description="This is the login page of the Web Frontend React JS application."
+                title="Pagina de Inicio de Sesión - Asistencia Docente"
+                description="Página de inicio de sesión para la aplicación de asistencia docente. Ingrese su correo electrónico y contraseña para acceder a su cuenta."
             />
             <div className="login-container">
                 <div className="login-card">
