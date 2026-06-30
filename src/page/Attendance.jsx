@@ -54,7 +54,7 @@ export const Attendance = () => {
             setErrorMessage('');
 
             try {
-                await new Promise((resolve) => setTimeout(resolve, 500));
+                await new Promise((resolve) => setTimeout(resolve, 750));
                 const response = await api.get(`/attendance/${attendanceId}`);
 
                 const { details } = response.data;
@@ -97,7 +97,7 @@ export const Attendance = () => {
         setMessage('');
 
         try {
-            await new Promise((resolve) => setTimeout(resolve, 500));
+            await new Promise((resolve) => setTimeout(resolve, 750));
 
             setMessage('Asistencia guardada correctamente.');
             navigate('/register'); // Redirect to dashboard after saving

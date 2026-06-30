@@ -46,7 +46,7 @@ export const Register = () => {
 
         try {
 
-            await new Promise((resolve) => setTimeout(resolve, 500));
+            await new Promise((resolve) => setTimeout(resolve, 750));
 
             const { data } = await api.post('/attendance', {
                 courseId: courseId,
