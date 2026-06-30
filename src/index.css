@@ -279,18 +279,18 @@ body {
 .attendance-actions {
     display: flex;
     justify-content: flex-end;
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
-.attendance-actions-between {
-    justify-content: space-between;
+.attendance-actions-end {
+    justify-content: end;
     gap: 12px;
 }
 
 .attendance-button {
     width: auto;
     min-width: 200px;
-    padding: 12px 24px;
+    padding: 12px 18px;
     background: var(--primary-color);
     color: white;
     border: none;
