@@ -1,9 +1,7 @@
-import { useState } from "react"
 import { PageMeta } from "../common/PageMeta"
-import axios from "axios";
-import escudoEscap from '../assets/escudo-escap.png';
-import { useForm } from "../hooks/useForm";
 import { useAuth } from "../context/AuthContext";
+import { useForm } from "../hooks/useForm";
+import escudo from '../assets/escudo-escap.png';
 
 export const Login = () => {
 
@@ -29,11 +27,7 @@ export const Login = () => {
                 <div className="login-card">
 
                     <div className="login-logo-container">
-                        <img
-                            src={escudoEscap}
-                            alt="Logo"
-                            className="login-logo"
-                        />
+                        <img src={escudo} alt="Logo" className="login-logo" />
                     </div>
 
                     <div className="login-header">
@@ -70,7 +64,6 @@ export const Login = () => {
                             />
                         </div>
 
-
                         {errors.length > 0 && (
                             <div className="login-error-container">
                                 {errors.map((err, index) => (
@@ -86,7 +79,7 @@ export const Login = () => {
                         </button>
                     </form>
 
-                    <p className="login-footer">© 2026 Created by <strong>@skfluxcoding</strong>. All rights reserved.</p>
+                    <p className="login-footer">© 2026 Created by @skfluxcoding. All rights reserved.</p>
 
                 </div>
             </div>
