@@ -63,8 +63,8 @@ export const Register = () => {
     return (
         <>
             <PageMeta
-                title="Register Page - Web Frontend React JS"
-                description="This is the register page of the Web Frontend React JS application."
+                title="Página de Registro - Asistencia Docente"
+                description="Página de registro para la aplicación de asistencia docente. Registre su asistencia para las clases."
             />
             <div className="attendance-container">
                 {/* Header with Logo */}
