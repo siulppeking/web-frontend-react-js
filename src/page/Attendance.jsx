@@ -84,9 +84,6 @@ export const Attendance = () => {
             studentId,
             present: !students.find((s) => s.studentId._id === studentId)?.present,
         });
-
-        console.log(response.data);
-
     };
 
     const handleSaveAttendance = async () => {
