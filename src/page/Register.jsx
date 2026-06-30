@@ -1,15 +1,63 @@
-import React from 'react'
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { PageMeta } from '../common/PageMeta'
 import escudoEscap from '../assets/escudo-escap.png';
+import { useAuth } from '../context/AuthContext';
+import api from '../services/api';
+import { useForm } from '../hooks/useForm';
 
 export const Register = () => {
 
-    const teacherName = "SO2. FAP ESCOBAR QUINTANA, LUIS GUISEPPE";
-    const teacherId = "178362";
-    const classId = "6a3204efc1aeaa5898819f95";
+    const { user } = useAuth();
+    const navigate = useNavigate();
 
-    const handleRegister = () => {
-        alert("Asistencia registrada correctamente");
+    const [courses, setCourses] = useState([]);
+
+    const { courseId, classType, handleSelectChange } = useForm({
+        courseId: '',
+        classType: '',
+    });
+
+    const [errorMessage, setErrorMessage] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    useEffect(() => {
+        const fetchCourses = async () => {
+            try {
+                const { data } = await api.get('/courses');
+                setCourses(data);
+            } catch (error) {
+                console.error('Error fetching courses:', error);
+            }
+        };
+
+        fetchCourses();
+    }, []);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (!courseId || !classType) {
+            setErrorMessage('Debes seleccionar curso y tipo de clase.');
+            return;
+        }
+
+        setErrorMessage('');
+        setIsSubmitting(true);
+
+        try {
+
+            await new Promise((resolve) => setTimeout(resolve, 500));
+
+            const { data } = await api.post('/attendance', {
+                courseId: courseId,
+                classType: classType,
+            });
+            const { id: attendanceId } = data;
+
+            navigate(`/register/${attendanceId}/attendance`);
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -30,45 +78,63 @@ export const Register = () => {
                 {/* Main Card */}
                 <main className="attendance-card">
                     <p className="attendance-welcome">
-                        Bienvenido docente: <strong>{teacherName} - ({teacherId})</strong>
+                        Bienvenido docente: <strong>{user.firstname}, {user.lastname} - (178362)</strong>
                     </p>
 
                     <p className="attendance-welcome">
-                        Te encuentras en la clase: <strong>{classId}</strong>
+                        Te encuentras en la clase: <strong>{user.id}</strong>
                     </p>
 
                     {/* Details Form / Table Layout */}
-                    <div className="attendance-table">
-                        <div className="attendance-row">
-                            <div className="attendance-label">Curso</div>
-                            <div className="attendance-value">
-                                <select className="attendance-select" defaultValue="java-fundamentals">
-                                    <option value="java-fundamentals">Seminario Java 17 - Fundamentals Developer</option>
-                                    <option value="java-web">Seminario Java 17 - Web Development</option>
-                                    <option value="java-backend">Seminario Java 17 - Backend Developer</option>
-                                    <option value="java-frontend">Seminario Java 17 - Frontend Developer</option>
-                                </select>
+                    <form onSubmit={handleSubmit}>
+                        <div className="attendance-table">
+                            <div className="attendance-row">
+                                <div className="attendance-label">Curso</div>
+                                <div className="attendance-value">
+                                    <select
+                                        className="attendance-select"
+                                        value={courseId}
+                                        onChange={handleSelectChange}
+                                        name="courseId"
+                                    >
+                                        <option value="">- No Seleccionado -</option>
+                                        {courses.map(course => (
+                                            <option key={course.id} value={course.id}>
+                                                {course.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div className="attendance-row">
+                                <div className="attendance-label">Tipo Clase</div>
+                                <div className="attendance-value">
+                                    <select
+                                        className="attendance-select"
+                                        value={classType}
+                                        onChange={handleSelectChange}
+                                        name="classType"
+                                    >
+                                        <option value="">- No Seleccionado -</option>
+                                        <option value="THEORY">Clase Teórica</option>
+                                        <option value="PRACTICE">Clase Práctica</option>
+                                        <option value="THEORY_PRACTICE">Clase Teórica y Práctica</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
 
-                        <div className="attendance-row">
-                            <div className="attendance-label">Tipo Clase</div>
-                            <div className="attendance-value">
-                                <select className="attendance-select" defaultValue="theory-practice">
-                                    <option value="theory">Clase Teórica</option>
-                                    <option value="practice">Clase Práctica</option>
-                                    <option value="theory-practice">Clase Teórica y Práctica</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+                        {errorMessage && <p className="attendance-feedback attendance-feedback-error">{errorMessage}</p>}
 
-                    {/* Action Button */}
-                    <div className="attendance-actions">
-                        <button className="attendance-button" onClick={handleRegister}>
-                            Registra tu asistencia
-                        </button>
-                    </div>
+                        {/* Action Button */}
+                        <div className="attendance-actions">
+                            <button className="attendance-button" disabled={isSubmitting}>
+                                {isSubmitting ? 'Registrando...' : 'Registra tu asistencia'}
+                            </button>
+                        </div>
+                    </form>
+
                 </main>
             </div>
         </>

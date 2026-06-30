@@ -1,9 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../services/api';
 
 const AuthContext = createContext(null);
-
-const API_URL = 'https://web-backend-7nev.onrender.com/api/auth';
 
 export const AuthProvider = ({ children }) => {
 
@@ -31,16 +29,12 @@ export const AuthProvider = ({ children }) => {
                 return;
             }
 
-            const { data } = await axios.get(`${API_URL}/verify`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
+            const { data } = await api.get('/auth/verify');
 
             setUser(data);
             setStatus('authenticated');
 
-        } catch (error) {
+        } catch {
 
             localStorage.removeItem('accessToken');
 
@@ -53,8 +47,8 @@ export const AuthProvider = ({ children }) => {
         try {
             clearErrors();
             setIsLoading(true);
-            const { data } = await axios.post(
-                `${API_URL}/login`,
+            const { data } = await api.post(
+                '/auth/login',
                 { email, password }
             );
 
@@ -107,11 +101,10 @@ export const AuthProvider = ({ children }) => {
                 status,
                 errors,
                 isLoading,
+                isAuthenticated: status === 'authenticated',
+                isChecking: status === 'checking',
                 login,
                 logout,
-                fetchVerify,
-                isAuthenticated: status === 'authenticated',
-                isChecking: status === 'checking'
             }}
         >
             {children}
