@@ -2,11 +2,11 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import { Index } from "./page/Index"
 import { Login } from "./page/Login"
 import { Register } from "./page/Register"
-import { Course } from "./page/Course"
 import { NotFound } from "./page/NotFound"
 import { PublicRouter } from "./routers/PublicRouter"
 import { PrivateRouter } from "./routers/PrivateRouter"
 import { useAuth } from "./context/AuthContext"
+import { Attendance } from "./page/Attendance"
 
 export const App = () => {
 
@@ -25,7 +25,7 @@ export const App = () => {
 
         <Route element={<PrivateRouter />}>
           <Route path="/register" element={<Register />} />
-          <Route path="/course" element={<Course />} />
+          <Route path="/register/:attendanceId/attendance" element={<Attendance />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />
