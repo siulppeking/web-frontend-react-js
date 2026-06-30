@@ -8,7 +8,7 @@ import { useForm } from '../hooks/useForm';
 
 export const Register = () => {
 
-    const { user } = useAuth();
+    const { user, logout, isLoading } = useAuth();
     const navigate = useNavigate();
 
     const [courses, setCourses] = useState([]);
@@ -125,14 +125,16 @@ export const Register = () => {
                             </div>
                         </div>
 
-                        {errorMessage && <p className="attendance-feedback attendance-feedback-error">{errorMessage}</p>}
+                    {errorMessage && <p className="attendance-feedback attendance-feedback-error">{errorMessage}</p>}
 
-                        {/* Action Button */}
-                        <div className="attendance-actions">
-                            <button className="attendance-button" disabled={isSubmitting}>
-                                {isSubmitting ? 'Registrando...' : 'Registra tu asistencia'}
-                            </button>
-                        </div>
+                    <div className="attendance-actions attendance-actions-end">
+                        <button className="attendance-button" type="button" onClick={logout} style={{ background: 'var(--danger-color)' }} disabled={isLoading}>
+                            {isLoading ? 'Cerrando Sesión...' : 'Cerrar Sesión'}
+                        </button>
+                        <button className="attendance-button" disabled={isSubmitting}>
+                            {isSubmitting ? 'Registrando...' : 'Registra tu asistencia'}
+                        </button>
+                    </div>
                     </form>
 
                 </main>

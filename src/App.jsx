@@ -12,7 +12,7 @@ export const App = () => {
 
   const { isChecking } = useAuth();
 
-  if (isChecking) return <div>Loading</div>;
+  if (isChecking) return <div>Loading...</div>;
 
   return (
     <Router>

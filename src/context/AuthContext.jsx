@@ -81,13 +81,16 @@ export const AuthProvider = ({ children }) => {
         setErrors([]);
     };
 
-    const logout = () => {
+    const logout = async () => {
 
+        setIsLoading(true);
+        await new Promise((resolve) => setTimeout(resolve, 750));
         localStorage.removeItem('accessToken');
 
         setUser(null);
         clearErrors();
         setStatus('unauthenticated');
+        setIsLoading(false);
     };
 
     useEffect(() => {
