@@ -363,6 +363,10 @@ body {
     color: var(--primary-color);
 }
 
+.attendance-student-row:hover {
+    background: #e5e7eb;
+}
+
 .attendance-switch {
     position: relative;
     display: inline-block;
